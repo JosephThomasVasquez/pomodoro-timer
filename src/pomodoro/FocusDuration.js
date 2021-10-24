@@ -4,12 +4,13 @@ import { minutesToDuration } from "../utils/duration/index";
 
 const FocusDuration = ({ session, durations, handleTimerDuration }) => {
   // SOLUTION: Handlers to decrease and increase focus duration
-  const handleDecreaseFocus = ({ target }) => {
-    if (!target.dataset.testid || target.dataset.testid === undefined)
+  const handleDecreaseFocus = ({ currentTarget }) => {
+    
+    if (!currentTarget.dataset.testid || currentTarget.dataset.testid === undefined)
       return null;
 
     if (
-      target.dataset.testid === "decrease-focus" &&
+      currentTarget.dataset.testid === "decrease-focus" &&
       durations.focusDuration > 5
     )
       handleTimerDuration({
@@ -18,12 +19,12 @@ const FocusDuration = ({ session, durations, handleTimerDuration }) => {
       });
   };
 
-  const handleIncreaseFocus = ({ target }) => {
-    if (!target.dataset.testid || target.dataset.testid === undefined)
+  const handleIncreaseFocus = ({ currentTarget }) => {
+    if (!currentTarget.dataset.testid || currentTarget.dataset.testid === undefined)
       return null;
 
     if (
-      target.dataset.testid === "increase-focus" &&
+      currentTarget.dataset.testid === "increase-focus" &&
       durations.focusDuration < 60
     )
       handleTimerDuration({

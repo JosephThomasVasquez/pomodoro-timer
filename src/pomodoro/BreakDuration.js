@@ -4,12 +4,12 @@ import { minutesToDuration } from "../utils/duration/index";
 
 const BreakDuration = ({ session, durations, handleTimerDuration }) => {
   // SOLUTION: Handlers to decrease and increase break duration
-  const handleDecreaseBreak = ({ target }) => {
-    if (!target.dataset.testid || target.dataset.testid === undefined)
+  const handleDecreaseBreak = ({ currentTarget }) => {
+    if (!currentTarget.dataset.testid || currentTarget.dataset.testid === undefined)
       return null;
 
     if (
-      target.dataset.testid === "decrease-break" &&
+      currentTarget.dataset.testid === "decrease-break" &&
       durations.breakDuration > 1
     )
       handleTimerDuration({
@@ -18,12 +18,12 @@ const BreakDuration = ({ session, durations, handleTimerDuration }) => {
       });
   };
 
-  const handleIncreaseBreak = ({ target }) => {
-    if (!target.dataset.testid || target.dataset.testid === undefined)
+  const handleIncreaseBreak = ({ currentTarget }) => {
+    if (!currentTarget.dataset.testid || currentTarget.dataset.testid === undefined)
       return null;
 
     if (
-      target.dataset.testid === "increase-break" &&
+      currentTarget.dataset.testid === "increase-break" &&
       durations.breakDuration < 15
     )
       handleTimerDuration({
