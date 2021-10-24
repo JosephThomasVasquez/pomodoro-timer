@@ -3,25 +3,33 @@ import React from "react";
 import { minutesToDuration } from "../utils/duration/index";
 
 const BreakDuration = ({ session, durations, handleTimerDuration }) => {
-  // SOLUTION: Handler to decrease and increase break duration
-  const handleBreakDuration = ({ target }) => {
-    if (target.name === "decrease-break" && durations.breakDuration > 1) {
-      const updateTime = {
+  // SOLUTION: Handlers to decrease and increase break duration
+  const handleDecreaseBreak = ({ target }) => {
+    if (!target.dataset.testid || target.dataset.testid === undefined)
+      return null;
+
+    if (
+      target.dataset.testid === "decrease-break" &&
+      durations.breakDuration > 1
+    )
+      handleTimerDuration({
         ...durations,
         breakDuration: durations.breakDuration - 1,
-      };
+      });
+  };
 
-      handleTimerDuration(updateTime);
-    }
+  const handleIncreaseBreak = ({ target }) => {
+    if (!target.dataset.testid || target.dataset.testid === undefined)
+      return null;
 
-    if (target.name === "increase-break" && durations.breakDuration < 15) {
-      const updateTime = {
+    if (
+      target.dataset.testid === "increase-break" &&
+      durations.breakDuration < 15
+    )
+      handleTimerDuration({
         ...durations,
         breakDuration: durations.breakDuration + 1,
-      };
-
-      handleTimerDuration(updateTime);
-    }
+      });
   };
 
   return (
@@ -41,7 +49,7 @@ const BreakDuration = ({ session, durations, handleTimerDuration }) => {
               className="btn btn-secondary"
               data-testid="decrease-break"
               name="decrease-break"
-              onClick={handleBreakDuration}
+              onClick={handleDecreaseBreak}
               disabled={!session ? false : true}
             >
               <span className="oi oi-minus" />
@@ -53,7 +61,7 @@ const BreakDuration = ({ session, durations, handleTimerDuration }) => {
               className="btn btn-secondary"
               data-testid="increase-break"
               name="increase-break"
-              onClick={handleBreakDuration}
+              onClick={handleIncreaseBreak}
               disabled={!session ? false : true}
             >
               <span className="oi oi-plus" />

@@ -99,7 +99,6 @@ function Pomodoro() {
    * Called whenever the play/pause button is clicked.
    */
   function playPause() {
-    console.log("session", session);
     setIsTimerRunning((prevState) => {
       const nextState = !prevState;
       if (nextState) {
@@ -115,7 +114,6 @@ function Pomodoro() {
           }
           return prevStateSession;
         });
-        console.log("session", session);
       }
       return nextState;
     });

@@ -3,25 +3,33 @@ import React from "react";
 import { minutesToDuration } from "../utils/duration/index";
 
 const FocusDuration = ({ session, durations, handleTimerDuration }) => {
-  // SOLUTION: Handler to decrease and increase focus duration
-  const handleFocus = ({ target }) => {
-    if (target.name === "decrease-focus" && durations.focusDuration > 5) {
-      const updateTime = {
+  // SOLUTION: Handlers to decrease and increase focus duration
+  const handleDecreaseFocus = ({ target }) => {
+    if (!target.dataset.testid || target.dataset.testid === undefined)
+      return null;
+
+    if (
+      target.dataset.testid === "decrease-focus" &&
+      durations.focusDuration > 5
+    )
+      handleTimerDuration({
         ...durations,
         focusDuration: durations.focusDuration - 5,
-      };
+      });
+  };
 
-      handleTimerDuration(updateTime);
-    }
+  const handleIncreaseFocus = ({ target }) => {
+    if (!target.dataset.testid || target.dataset.testid === undefined)
+      return null;
 
-    if (target.name === "increase-focus" && durations.focusDuration < 60) {
-      const updateTime = {
+    if (
+      target.dataset.testid === "increase-focus" &&
+      durations.focusDuration < 60
+    )
+      handleTimerDuration({
         ...durations,
         focusDuration: durations.focusDuration + 5,
-      };
-
-      handleTimerDuration(updateTime);
-    }
+      });
   };
 
   return (
@@ -39,8 +47,7 @@ const FocusDuration = ({ session, durations, handleTimerDuration }) => {
             type="button"
             className="btn btn-secondary"
             data-testid="decrease-focus"
-            name="decrease-focus"
-            onClick={handleFocus}
+            onClick={handleDecreaseFocus}
             disabled={!session ? false : true}
           >
             <span className="oi oi-minus" />
@@ -51,8 +58,7 @@ const FocusDuration = ({ session, durations, handleTimerDuration }) => {
             type="button"
             className="btn btn-secondary"
             data-testid="increase-focus"
-            name="increase-focus"
-            onClick={handleFocus}
+            onClick={handleIncreaseFocus}
             disabled={!session ? false : true}
           >
             <span className="oi oi-plus" />
